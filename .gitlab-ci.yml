@@ -1,0 +1,30 @@
+stages:
+  - execute_scripts
+
+variables:
+  EXCEL_FILE: "vms.xlsx"
+  JSON_FILE: "vms.json"
+  CONSTANT_FILE: "constants.tf"
+  OUTPUT_FILE: "locals.tf"
+
+before_script:
+  - mkdir test_stack
+  - cp sample/* test_stack
+
+
+execute_scripts_job:
+  stage: execute_scripts
+  script:
+    - python excel_to_json.py
+    - python json_to_tf.py
+    - mv $OUTPUT_FILE test_stack
+
+artifacts:
+  paths:
+    - test_stack
+
+delete_folder_job:
+  stage: execute_scripts
+  script:
+    - rm -rf test_stack
+  when: always
