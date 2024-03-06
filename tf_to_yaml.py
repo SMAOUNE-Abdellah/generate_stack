@@ -20,9 +20,9 @@ def generate_yaml(data, output_file):
     with open(output_file, 'w') as f:
         yaml.dump(data, f, default_flow_style=False)
 
-if __name__ == "__main__":
-    terraform_file_path = 'test.tf'
-    yaml_output_file_path = 'test.yaml'
 
-    terraform_data = parse_terraform_file(terraform_file_path)
-    generate_yaml(terraform_data, yaml_output_file_path)
+terraform_file_path = 'test.tf'
+yaml_output_file_path = 'test.yaml'
+
+terraform_data = parse_terraform_file(terraform_file_path)
+generate_yaml(terraform_data, yaml_output_file_path)
